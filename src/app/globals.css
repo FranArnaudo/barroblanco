@@ -1,7 +1,3 @@
-@tailwind base;
-@tailwind components;
-@tailwind utilities;
-
 :root {
   --foreground-rgb: 0, 0, 0;
   --background-start-rgb: 214, 219, 220;
@@ -17,17 +13,38 @@
 }
 
 body {
-  color: rgb(var(--foreground-rgb));
-  background: linear-gradient(
-      to bottom,
-      transparent,
-      rgb(var(--background-end-rgb))
-    )
-    rgb(var(--background-start-rgb));
 }
-
+.sidebar {
+  display: flex;
+  flex-grow: 0.74;
+  transition: ease-in-out 0.15s;
+  padding: 0.5rem 1rem;
+  flex-direction: column;
+  position: relative;
+  gap: 1.25rem;
+  @media (min-width: 768px) {
+    flex: 0.33;
+    padding: 1rem 2rem;
+  }
+}
+.sidebar-collapsed {
+  display: flex;
+  flex: 0.05;
+  padding: 0;
+  position: relative;
+  transition: ease-in-out 0.15s;
+  @media (min-width: 768px) {
+    flex: 0.01;
+  }
+}
 @layer utilities {
   .text-balance {
     text-wrap: balance;
   }
+  .sidebar-link {
+    @apply flex items-center gap-2 p-2 pr-0 hover:bg-primary-light/40;
+  }
 }
+@tailwind base;
+@tailwind components;
+@tailwind utilities;
