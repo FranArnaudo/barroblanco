@@ -11,30 +11,64 @@
     --background-end-rgb: 0, 0, 0;
   }
 }
+html {
+  min-height: 100vh;
+  height: fit-content;
+  min-height: -webkit-fill-available;
+}
+/* Scroll bar stylings */
+::-webkit-scrollbar {
+  width: 10px;
+  height: 10px;
+}
 
+/* Track */
+::-webkit-scrollbar-track {
+  background: var(--lightestgrey);
+}
+
+/* Handle */
+::-webkit-scrollbar-thumb {
+  background: #888;
+  border-radius: 5px;
+}
+
+/* Handle on hover */
+::-webkit-scrollbar-thumb:hover {
+  background: #555;
+}
 body {
+  min-height: 100vh;
+  height: fit-content;
 }
 .sidebar {
   display: flex;
-  flex-grow: 0.74;
   transition: ease-in-out 0.15s;
   padding: 0.5rem 1rem;
   flex-direction: column;
-  position: relative;
+  z-index: 999;
+  position: absolute;
+  left: 0;
+  height: 100vh;
+  width: 75%;
   gap: 1.25rem;
+  backdrop-filter: blur(30px);
   @media (min-width: 768px) {
-    flex: 0.33;
+    position: relative;
+    width: 33%;
     padding: 1rem 2rem;
   }
 }
 .sidebar-collapsed {
+  position: relative;
+  left: 0;
   display: flex;
-  flex: 0.05;
+  width: 2%;
   padding: 0;
   position: relative;
   transition: ease-in-out 0.15s;
   @media (min-width: 768px) {
-    flex: 0.01;
+    width: 1%;
   }
 }
 @layer utilities {
@@ -43,6 +77,12 @@ body {
   }
   .sidebar-link {
     @apply flex items-center gap-2 p-2 pr-0 hover:bg-primary-light/40;
+  }
+  .text-input {
+    @apply flex pl-2 border border-2 border-slate-200 rounded-lg w-full h-10 focus:border-0 focus:outline-slate-400 bg-white;
+  }
+  .custom-button {
+    @apply p-2 bg-primary-light hover:bg-primary-main rounded-lg shadow-lg;
   }
 }
 @tailwind base;
