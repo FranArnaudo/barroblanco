@@ -1,9 +1,9 @@
 import type { Metadata } from "next";
-import { Inter } from "next/font/google";
+import { Montserrat } from "next/font/google";
 import "./globals.css";
 import Sidebar from "@/components/Sidebar/Sidebar";
 
-const inter = Inter({ subsets: ["latin"] });
+const montserrat = Montserrat({ subsets: ["latin"] });
 
 export const metadata: Metadata = {
   title: "Barro Blanco - Dashboard",
@@ -16,9 +16,9 @@ export default function RootLayout({
   children: React.ReactNode;
 }>) {
   return (
-    <html lang="en" className="h-full w-full">
+    <html lang="en">
       <body
-        className={`${inter.className} h-full w-full bg-slate-200 flex text-black`}
+        className={`${montserrat.className} h-full w-full bg-primary-light flex text-black`}
       >
         <Sidebar />
         {children}

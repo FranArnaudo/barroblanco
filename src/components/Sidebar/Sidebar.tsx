@@ -11,7 +11,7 @@ const playfair_Display = Playfair_Display({ subsets: ["latin"] });
 
 const Sidebar = () => {
   const path = usePathname();
-  const [collapsed, setCollapsed] = useState(false);
+  const [collapsed, setCollapsed] = useState(path !== "/");
   return (
     <div
       className={`
@@ -30,13 +30,22 @@ const Sidebar = () => {
       </div>
       <span
         className={`${playfair_Display.className} ${
-          collapsed ? "hidden" : "text-4xl md:text-8xl select-none "
+          collapsed
+            ? "hidden"
+            : "text-4xl md:text-8xl select-none overflow-hidden"
         }`}
       >
         Barro Blanco
       </span>
-      <ul className={collapsed ? "hidden" : "md:text-2xl"}>
+      <ul className={collapsed ? "hidden" : "md:text-2xl overflow-hidden"}>
         <li>
+          <Link
+            href={"/"}
+            className={`sidebar-link ${path === "/" && "bg-primary-light"}`}
+          >
+            <Icon icon="gravity-ui:house" className="color-primary-main" />
+            {!collapsed && "Inicio"}
+          </Link>
           <Link
             href={"materiales"}
             className={`sidebar-link ${
