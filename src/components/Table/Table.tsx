@@ -17,7 +17,7 @@ const Table = ({ items, totalPages, columns, ActionComponent }: TableProps) => {
           <thead className="bg-primary-light table-header-group [&>tr>th]:p-3">
             <tr className="table-row [&>:first-child]:rounded-tl-lg [&>:last-child]:rounded-tr-lg overflow-scroll">
               {Object.keys(columns).map((column) => (
-                <th key={column} className="table-cell">
+                <th key={column} className="table-cell font-semibold">
                   {column}
                 </th>
               ))}

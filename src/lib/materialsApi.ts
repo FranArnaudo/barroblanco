@@ -40,7 +40,6 @@ export const fetchMaterials = async ({
     .limit(Number(take))
     .skip(skip)
     .toArray();
-  // Fetching materials from the database
   return {
     totalPages,
     data,
