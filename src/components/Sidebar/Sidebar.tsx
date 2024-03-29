@@ -15,7 +15,7 @@ const Sidebar = () => {
   return (
     <div
       className={`
-        bg-slate-100 
+        bg-white 
 				shadow-lg
 				${collapsed ? "sidebar-collapsed" : "sidebar"}
         `}

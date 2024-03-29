@@ -81,8 +81,27 @@ body {
   .text-input {
     @apply flex pl-2 border border-2 border-slate-200 rounded-lg w-full h-10 focus:border-0 focus:outline-slate-400 bg-white;
   }
+
+  .with-prefix {
+    @apply rounded-tl-none rounded-bl-none border-l-0;
+  }
+  .with-suffix {
+    @apply rounded-tr-none rounded-br-none border-r-0;
+  }
+  .input-prefix {
+    @apply rounded-s-lg bg-slate-100 h-full border border-2 h-full border-r-0 flex border-slate-200 h-[40px] p-2 items-center justify-center;
+  }
+  .input-suffix {
+    @apply rounded-e-lg bg-slate-100 h-full border border-2 h-full border-l-0 flex border-slate-200 h-[40px] p-2 items-center justify-center;
+  }
+  .input-error {
+    @apply border-danger-main outline-danger-main;
+  }
   .custom-button {
-    @apply p-2 bg-primary-light hover:bg-primary-main rounded-lg shadow-lg;
+    @apply p-2 bg-primary-light border border-2 border-primary-light hover:bg-primary-main hover:border-primary-main rounded-lg shadow-lg box-border font-medium;
+  }
+  .custom-button-secondary {
+    @apply p-2 bg-white border border-2 border-primary-light hover:bg-primary-light box-border rounded-lg shadow-lg font-medium;
   }
 }
 @tailwind base;
