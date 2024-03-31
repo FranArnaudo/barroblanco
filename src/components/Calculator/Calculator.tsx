@@ -130,6 +130,7 @@ const Row = ({ row, materials, deleteRow, updateRow }: RowProps) => {
         Cantidad
       </label>
       <input
+        type="number"
         onChange={debounce(handleChange, 400)}
         name="amount"
         className=" row-start-2 row-end-2 col-span-4 text-input"
