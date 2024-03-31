@@ -98,10 +98,10 @@ body {
     @apply border-danger-main outline-danger-main;
   }
   .custom-button {
-    @apply p-2 bg-primary-light border border-2 border-primary-light hover:bg-primary-main hover:border-primary-main rounded-lg shadow-lg box-border font-medium;
+    @apply p-2 bg-primary-light border border-2 border-primary-light hover:bg-primary-main hover:border-primary-main rounded-lg shadow-lg box-border font-medium cursor-pointer flex justify-center items-center disabled:opacity-[40%] disabled:cursor-not-allowed  disabled:hover:bg-primary-light disabled:hover:border-primary-light;
   }
   .custom-button-secondary {
-    @apply p-2 bg-white border border-2 border-primary-light hover:bg-primary-light box-border rounded-lg shadow-lg font-medium;
+    @apply p-2 bg-white border border-2 border-primary-light hover:bg-primary-light box-border rounded-lg shadow-lg font-medium cursor-pointer flex justify-center items-center disabled:opacity-[70%] disabled:cursor-not-allowed disabled:hover:bg-white disabled:hover:border-primary-light;
   }
 }
 @tailwind base;

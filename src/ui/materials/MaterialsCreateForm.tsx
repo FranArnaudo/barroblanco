@@ -4,6 +4,7 @@ import { createMaterial } from "@/lib/serverActions/materialsServerActions";
 import { useForm, SubmitHandler } from "react-hook-form";
 import { CreateMaterialForm } from "../../../types";
 import { useRouter } from "next/navigation";
+import { errorToast, successToast } from "@/lib/toasts";
 
 const MaterialsCreateForm = () => {
   const {
@@ -20,7 +21,10 @@ const MaterialsCreateForm = () => {
   });
   const router = useRouter();
   const onSubmit: SubmitHandler<CreateMaterialForm> = (data) =>
-    createMaterial(data).finally(() => router.replace("/materiales"));
+    createMaterial(data)
+      .then(() => successToast("Material creado con exito"))
+      .catch(() => errorToast("Ha sucedido un error al crear el material"))
+      .finally(() => router.replace("/materiales"));
   return (
     <form
       className="w-full flex flex-col gap-3"
