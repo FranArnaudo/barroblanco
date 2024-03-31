@@ -1,3 +1,4 @@
+import { Material } from "../../types";
 import clientPromise from "./mongodb";
 
 type FetchMaterialsArgs = {
@@ -11,7 +12,7 @@ type MaterialsQuery = {
   type?: { $regex: string; $options: string };
 };
 
-export const fetchMaterials = async ({
+export const fetchMaterialsPaginated = async ({
   name,
   type,
   page,
@@ -27,14 +28,14 @@ export const fetchMaterials = async ({
     query.type = { $regex: `^${type}$`, $options: "i" }; // Case-insensitive exact match
   }
   const totalDocuments = await client
-    .db("test")
+    .db(process.env.DATABASE_NAME)
     .collection("materials")
     .countDocuments(query);
   const totalPages = Math.ceil(totalDocuments / Number(take));
   // Calculate the number of documents to skip
   const skip = (Number(page) - 1) * Number(take);
   const data = await client
-    .db("test")
+    .db(process.env.DATABASE_NAME)
     .collection("materials")
     .find(query)
     .limit(Number(take))
@@ -44,4 +45,14 @@ export const fetchMaterials = async ({
     totalPages,
     data,
   };
+};
+
+export const fetchAllMaterials = async () => {
+  const client = await clientPromise;
+  await client.connect();
+  return (await client
+    .db(process.env.DATABASE_NAME)
+    .collection<Material>("materials")
+    .find()
+    .toArray()) as Material[];
 };

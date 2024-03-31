@@ -1,11 +1,13 @@
 import Table from "@/components/Table/Table";
-import { fetchMaterials } from "@/lib/materialsApi";
+import { fetchMaterialsPaginated } from "@/lib/materialsApi";
 import { unstable_noStore as noStore } from "next/cache";
 import MaterialsSearch from "@/ui/materials/MaterialsSearch";
 import MaterialsTableActions from "@/ui/materials/MaterialsTableActions";
 import { Suspense } from "react";
 import TableSkeleton from "@/components/Skeletons/TableSkeleton";
 import CardWrapper from "@/components/CardWrapper/CardWrapper";
+import { successToast } from "@/lib/toasts";
+import Header from "@/components/Header/Header";
 
 const MaterialsPage = async ({
   searchParams,
@@ -18,10 +20,17 @@ const MaterialsPage = async ({
   };
 }) => {
   noStore();
-  const { data: materials, totalPages } = await fetchMaterials(searchParams);
+  const { data: materials, totalPages } = await fetchMaterialsPaginated(
+    searchParams
+  );
+  successToast("a");
   return (
     <CardWrapper>
-      <h1 className="text-bold text-4xl self-start">Materiales</h1>
+      <Header
+        title="Materiales"
+        buttonRef="materiales/create"
+        buttonText="Añadir Material"
+      />
       <MaterialsSearch />
       <div className="w-full">
         <Suspense fallback={<TableSkeleton rows={10} columns={3} />}>
