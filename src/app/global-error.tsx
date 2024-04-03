@@ -1,6 +1,6 @@
 "use client";
 
-const GlobalError = (error, reset) => {
+const GlobalError = () => {
   return (
     <div className="w-full h-full">
       <span>Ha habido un error</span>
