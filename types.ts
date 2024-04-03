@@ -3,6 +3,11 @@ export type CreateMaterialForm = {
   price: number;
   type: string;
 };
+export type UpdateMaterialForm = {
+  name: string;
+  price: number;
+  type: string;
+};
 
 export type Material = {
   id: string;

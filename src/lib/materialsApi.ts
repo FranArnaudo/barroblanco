@@ -56,3 +56,12 @@ export const fetchAllMaterials = async () => {
     .find()
     .toArray()) as Material[];
 };
+
+export const fetchMaterialById = async (id: string): Promise<Material> => {
+  const client = await clientPromise;
+  await client.connect();
+  return (await client
+    .db(process.env.DATABASE_NAME)
+    .collection<Material>("materials")
+    .findOne({ id }, { projection: { _id: 0 } })) as Material;
+};

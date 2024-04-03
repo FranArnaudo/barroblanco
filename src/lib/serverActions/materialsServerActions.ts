@@ -5,7 +5,7 @@ import clientPromise from "../mongodb";
 import { CalculationRow, CalculationSummary, Material } from "../../../types";
 import { uuid } from "uuidv4";
 
-export const createMaterial = async (data: any) => {
+export const createMaterial = async (data: Partial<Material>) => {
   const client = await clientPromise;
   client
     .db(process.env.DATABASE_NAME)
@@ -16,9 +16,30 @@ export const createMaterial = async (data: any) => {
       createdAt: new Date(),
       lastUpdated: new Date(),
     });
-  revalidatePath("/materials");
+  revalidatePath("/materiales");
 };
-
+export const updateMaterial = async (data: Partial<Material>) => {
+  const client = await clientPromise;
+  const response = await client
+    .db(process.env.DATABASE_NAME)
+    .collection("materials")
+    .findOneAndUpdate(
+      { id: data.id },
+      {
+        $set: {
+          name: data.name,
+          price: data.price,
+          type: data.type,
+          lastUpdated: new Date(),
+        },
+      }
+    );
+  console.log(
+    "🚀Fran ~ file: materialsServerActions.ts:27 ~ updateMaterial ~ response:",
+    response
+  );
+  revalidatePath("/materiales");
+};
 export const calculate = async (rows: CalculationRow[]) => {
   const idsOfMaterialsToFind = rows.map((row) => row.materialId);
   const client = await clientPromise;
@@ -33,18 +54,13 @@ export const calculate = async (rows: CalculationRow[]) => {
       const row = rows.find((row) => {
         return row.materialId === current.id;
       });
-      console.log(
-        "🚀Fran ~ file: materialsServerActions.ts:32 ~ calculate ~ row:",
-        row
-      );
       if (!row) {
-        return accum; // Skip if no matching row found
+        return accum;
       }
 
       const amount = row.amount;
       const cost = amount * current.price;
 
-      // Add the cost to the total
       accum.total += cost;
       accum.summary.push({ name: current.name, cost });
 
