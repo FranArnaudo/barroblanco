@@ -47,7 +47,7 @@ const Sidebar = () => {
             {!collapsed && "Inicio"}
           </Link>
           <Link
-            href={"materiales"}
+            href={"/materiales"}
             className={`sidebar-link ${
               path.includes("materiales") && "bg-primary-light"
             }`}
@@ -56,7 +56,7 @@ const Sidebar = () => {
             {!collapsed && "Materiales"}
           </Link>
           <Link
-            href={"plantillas"}
+            href={"/plantillas"}
             className={`sidebar-link ${
               path.includes("plantillas") && "bg-primary-light"
             }`}
@@ -68,7 +68,7 @@ const Sidebar = () => {
             {!collapsed && "Plantillas"}
           </Link>
           <Link
-            href={"calcular"}
+            href={"/calcular"}
             className={`sidebar-link ${
               path.includes("calcular") && "bg-primary-light"
             }`}
@@ -80,7 +80,7 @@ const Sidebar = () => {
             {!collapsed && "Calcular"}
           </Link>
           <Link
-            href={"cursos"}
+            href={"/cursos"}
             className={`sidebar-link ${
               path.includes("cursos") && "bg-primary-light"
             }`}

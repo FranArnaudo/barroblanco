@@ -41,7 +41,7 @@ const Table = ({ items, totalPages, columns, ActionComponent }: TableProps) => {
                     </td>
                   ))}
                   <td className="flex w-full align-center justify-center gap-2 text-center ">
-                    {ActionComponent({ id: "a" })}
+                    {ActionComponent({ id: item.id })}
                   </td>
                 </tr>
               ))}
