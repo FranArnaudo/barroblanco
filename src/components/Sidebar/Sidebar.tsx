@@ -29,11 +29,10 @@ const Sidebar = () => {
         />
       </div>
       <span
-        className={`${playfair_Display.className} ${
-          collapsed
+        className={`${playfair_Display.className} ${collapsed
             ? "hidden"
             : "text-4xl md:text-8xl select-none overflow-hidden"
-        }`}
+          }`}
       >
         Barro Blanco
       </span>
@@ -48,18 +47,27 @@ const Sidebar = () => {
           </Link>
           <Link
             href={"/materiales"}
-            className={`sidebar-link ${
-              path.includes("materiales") && "bg-primary-light"
-            }`}
+            className={`sidebar-link ${path.includes("materiales") && "bg-primary-light"
+              }`}
           >
             <Icon icon="mdi:material" className="color-primary-main" />
             {!collapsed && "Materiales"}
           </Link>
           <Link
+            href={"/tipos"}
+            className={`sidebar-link ${path.includes("tipos") && "bg-primary-light"
+              }`}
+          >
+            <Icon
+              icon="mdi:shape-plus-outline"
+              className="color-primary-main"
+            />
+            {!collapsed && "Tipos"}
+          </Link>
+          <Link
             href={"/plantillas"}
-            className={`sidebar-link ${
-              path.includes("plantillas") && "bg-primary-light"
-            }`}
+            className={`sidebar-link ${path.includes("plantillas") && "bg-primary-light"
+              }`}
           >
             <Icon
               icon="octicon:project-template-16"
@@ -69,9 +77,8 @@ const Sidebar = () => {
           </Link>
           <Link
             href={"/calcular"}
-            className={`sidebar-link ${
-              path.includes("calcular") && "bg-primary-light"
-            }`}
+            className={`sidebar-link ${path.includes("calcular") && "bg-primary-light"
+              }`}
           >
             <Icon
               icon="ion:calculator-outline"
@@ -81,9 +88,8 @@ const Sidebar = () => {
           </Link>
           <Link
             href={"/cursos"}
-            className={`sidebar-link ${
-              path.includes("cursos") && "bg-primary-light"
-            }`}
+            className={`sidebar-link ${path.includes("cursos") && "bg-primary-light"
+              }`}
           >
             <Icon icon="ph:student" className="color-primary-main" />
             {!collapsed && "Cursos"}
