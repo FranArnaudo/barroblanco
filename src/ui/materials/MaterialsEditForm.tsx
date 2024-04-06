@@ -31,7 +31,7 @@ const MaterialsEditForm = ({ material }: MaterialsEditFormProps) => {
   const router = useRouter();
   const onSubmit: SubmitHandler<UpdateMaterialForm> = (data) =>
     updateMaterial({ id: material.id, ...data })
-      .then(() => console.log(data))
+      .then(() => successToast(`${material.name} actualizado correctamente`))
       .catch(() => errorToast("Ha sucedido un error al actualizar el material"))
       .finally(() => router.replace("/materiales"));
   return (
@@ -76,12 +76,6 @@ const MaterialsEditForm = ({ material }: MaterialsEditFormProps) => {
         </select>
       </div>
       <div className="flex w-full flex-col gap-1 md:flex-row md:items-center md:justify-end">
-        <input
-          type="submit"
-          className="custom-button w-full md:w-fit"
-          role="submit"
-          value="Guardar"
-        />
         <button
           className="custom-button-secondary w-full md:w-fit"
           type="button"
@@ -90,6 +84,12 @@ const MaterialsEditForm = ({ material }: MaterialsEditFormProps) => {
         >
           Cancelar
         </button>
+        <input
+          type="submit"
+          className="custom-button w-full md:w-fit"
+          role="submit"
+          value="Guardar"
+        />
       </div>
     </form>
   );

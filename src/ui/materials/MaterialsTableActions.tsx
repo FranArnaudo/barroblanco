@@ -5,10 +5,18 @@ import { useMediaQuery } from "@uidotdev/usehooks";
 import Link from "next/link";
 import { useRef, useState } from "react";
 import ClickAwayListener from "react-click-away-listener";
+import { deleteMaterial } from "@/lib/serverActions/materialsServerActions";
+import { errorToast, successToast } from "@/lib/toasts";
 
 const MaterialsTableActions = ({ id }: { id: string }) => {
   const [open, setOpen] = useState(false);
   const buttonRef = useRef<HTMLButtonElement | null>(null);
+
+  const handleDelete = async () => {
+    deleteMaterial(id)
+      .then(() => successToast("Material eliminado correctamente"))
+      .catch(() => errorToast("Hubo un problema al eliminar el material"));
+  };
   return (
     <div className="absolute inline-block">
       <button ref={buttonRef} onClick={() => setOpen(true)}>
@@ -22,8 +30,8 @@ const MaterialsTableActions = ({ id }: { id: string }) => {
                 <Link href={`materiales/${id}/edit`}>Editar</Link>
               </li>
               <div className="w-full bg-white h-px"></div>
-              <li>
-                <Link href={"/edit"}>Eliminar</Link>
+              <li onClick={handleDelete} className="cursor-pointer">
+                Eliminar
               </li>
             </ul>
           </div>

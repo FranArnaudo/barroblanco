@@ -1,13 +1,14 @@
+import { Material, MaterialType } from "../../types";
 import clientPromise from "./mongodb";
 
 type FetchMaterialTypeArgs = {
-  name: string,
-  page: string,
-  take: string
-}
+  name: string;
+  page: string;
+  take: string;
+};
 type MaterialTypeQuery = {
   name?: { $regex: string; $options: string };
-}
+};
 export const fetchTypesPaginated = async ({
   name,
   page = "1",
@@ -37,4 +38,23 @@ export const fetchTypesPaginated = async ({
     totalPages,
     data,
   };
+};
+export const fetchAllTypes = async (): Promise<MaterialType[]> => {
+  const client = await clientPromise;
+  await client.connect();
+  const data = await client
+    .db(process.env.DATABASE_NAME)
+    .collection<MaterialType>("materialTypes")
+    .find({})
+    .toArray();
+  return data;
+};
+
+export const fetchTypeById = async (id: string): Promise<MaterialType> => {
+  const client = await clientPromise;
+  await client.connect();
+  return (await client
+    .db(process.env.DATABASE_NAME)
+    .collection<Material>("materialTypes")
+    .findOne({ id }, { projection: { _id: 0 } })) as MaterialType;
 };

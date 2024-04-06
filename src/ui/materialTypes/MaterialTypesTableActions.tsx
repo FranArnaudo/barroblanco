@@ -3,10 +3,19 @@ import React, { useRef, useState } from "react";
 import { Icon } from "@iconify/react";
 import Link from "next/link";
 import ClickAwayListener from "react-click-away-listener";
+import { deleteMaterialType } from "@/lib/serverActions/materialTypeServerActions";
+import { errorToast, successToast } from "@/lib/toasts";
 
 const MaterialTypesTableActions = ({ id }: { id: string }) => {
   const [open, setOpen] = useState(false);
   const buttonRef = useRef<HTMLButtonElement | null>(null);
+  const handleDelete = async () => {
+    deleteMaterialType(id)
+      .then(() => successToast("Tipo eliminado correctamente"))
+      .catch(() =>
+        errorToast("Hubo un problema al eliminar el tipo de material")
+      );
+  };
   return (
     <div className="absolute inline-block">
       <button ref={buttonRef} onClick={() => setOpen(true)}>
@@ -20,8 +29,8 @@ const MaterialTypesTableActions = ({ id }: { id: string }) => {
                 <Link href={`tipos/${id}/edit`}>Editar</Link>
               </li>
               <div className="w-full bg-white h-px"></div>
-              <li>
-                <Link href={"/edit"}>Eliminar</Link>
+              <li onClick={handleDelete} className="cursor-pointer">
+                Eliminar
               </li>
             </ul>
           </div>

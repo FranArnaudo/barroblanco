@@ -7,7 +7,11 @@ import { useRouter } from "next/navigation";
 import { useRouter as Router } from "next/router";
 import IconButton from "@/components/Buttons/IconButton";
 import { MdiTrashOutline } from "../icons/Icons";
-const MaterialsSearch = () => {
+import { MaterialType } from "../../../types";
+type MaterialsSearchType = {
+  materialTypes: MaterialType[];
+};
+const MaterialsSearch = ({ materialTypes }: MaterialsSearchType) => {
   const path = usePathname();
   const params = useSearchParams();
   const { replace, refresh } = useRouter();
@@ -64,8 +68,11 @@ const MaterialsSearch = () => {
         <label>Tipo</label>
         <select className="text-input" onChange={handleOnChangeSelect}>
           <option value="all">Todos</option>
-          <option value="arcilla">Arcilla</option>
-          <option value="pigmento">Pigmento</option>
+          {materialTypes.map((type) => (
+            <option key={type.id} value={type.name}>
+              {type.name}
+            </option>
+          ))}
         </select>
       </div>
     </div>
