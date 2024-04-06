@@ -1,17 +1,12 @@
 "use client";
 
-import { useParams, usePathname, useSearchParams } from "next/navigation";
+import { usePathname, useSearchParams } from "next/navigation";
 import { debounce, set } from "lodash";
-import { ChangeEvent, useEffect, useState } from "react";
+import { useState } from "react";
 import { useRouter } from "next/navigation";
-import { useRouter as Router } from "next/router";
-import IconButton from "@/components/Buttons/IconButton";
 import { MdiTrashOutline } from "../icons/Icons";
-import { MaterialType } from "../../../types";
-type MaterialsSearchType = {
-  materialTypes: MaterialType[];
-};
-const MaterialsSearch = ({ materialTypes }: MaterialsSearchType) => {
+
+const MaterialTypesSearch = () => {
   const path = usePathname();
   const params = useSearchParams();
   const { replace, refresh } = useRouter();
@@ -36,15 +31,6 @@ const MaterialsSearch = ({ materialTypes }: MaterialsSearchType) => {
     replacePathAndQuery(`${path}?${urlParams.toString()}`);
   };
 
-  const handleOnChangeSelect = (e: ChangeEvent<HTMLSelectElement>) => {
-    const urlParams = new URLSearchParams(params);
-    if (e.target.value && e.target.value !== "all") {
-      urlParams.set("type", e.target.value);
-    } else {
-      urlParams.delete("type");
-    }
-    replacePathAndQuery(`${path}?${urlParams.toString()}`);
-  };
   return (
     <div className="flex flex-col bg-white shadow-2xl gap-2 p-3 w-full rounded-lg ">
       <div className="">
@@ -64,19 +50,8 @@ const MaterialsSearch = ({ materialTypes }: MaterialsSearchType) => {
           </button>
         </div>
       </div>
-      <div className="flex flex-col items-start gap-2">
-        <label>Tipo</label>
-        <select className="text-input" onChange={handleOnChangeSelect}>
-          <option value="all">Todos</option>
-          {materialTypes.map((type) => (
-            <option key={type.id} value={type.name}>
-              {type.name}
-            </option>
-          ))}
-        </select>
-      </div>
     </div>
   );
 };
 
-export default MaterialsSearch;
+export default MaterialTypesSearch;

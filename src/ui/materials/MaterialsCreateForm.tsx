@@ -2,11 +2,14 @@
 
 import { createMaterial } from "@/lib/serverActions/materialsServerActions";
 import { useForm, SubmitHandler } from "react-hook-form";
-import { CreateMaterialForm } from "../../../types";
+import { CreateMaterialForm, MaterialType } from "../../../types";
 import { useRouter } from "next/navigation";
 import { errorToast, successToast } from "@/lib/toasts";
 
-const MaterialsCreateForm = () => {
+type MaterialsCreateFormProps = {
+  materialTypes: MaterialType[];
+};
+const MaterialsCreateForm = ({ materialTypes }: MaterialsCreateFormProps) => {
   const {
     register,
     handleSubmit,
@@ -62,17 +65,14 @@ const MaterialsCreateForm = () => {
       <div>
         <label className="font-semibold">Tipo</label>
         <select {...register("type")} className="text-input">
-          <option value={"Arcilla"}>Arcilla</option>
-          <option value={"Pigmento"}>Pigmento</option>
+          {materialTypes.map((type) => (
+            <option key={type.id} value={type.name}>
+              {type.name}
+            </option>
+          ))}
         </select>
       </div>
       <div className="flex w-full flex-col gap-1 md:flex-row md:items-center md:justify-end">
-        <input
-          type="submit"
-          className="custom-button w-full md:w-fit"
-          role="submit"
-          value="Guardar"
-        />
         <button
           className="custom-button-secondary w-full md:w-fit"
           type="button"
@@ -81,6 +81,12 @@ const MaterialsCreateForm = () => {
         >
           Cancelar
         </button>
+        <input
+          type="submit"
+          className="custom-button w-full md:w-fit"
+          role="submit"
+          value="Guardar"
+        />
       </div>
     </form>
   );

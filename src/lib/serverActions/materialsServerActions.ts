@@ -34,10 +34,14 @@ export const updateMaterial = async (data: Partial<Material>) => {
         },
       }
     );
-  console.log(
-    "🚀Fran ~ file: materialsServerActions.ts:27 ~ updateMaterial ~ response:",
-    response
-  );
+  revalidatePath("/materiales");
+};
+export const deleteMaterial = async (id: string) => {
+  const client = await clientPromise;
+  const response = await client
+    .db(process.env.DATABASE_NAME)
+    .collection("materials")
+    .findOneAndDelete({ id });
   revalidatePath("/materiales");
 };
 export const calculate = async (rows: CalculationRow[]) => {

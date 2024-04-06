@@ -8,6 +8,7 @@ import TableSkeleton from "@/components/Skeletons/TableSkeleton";
 import CardWrapper from "@/components/CardWrapper/CardWrapper";
 import { successToast } from "@/lib/toasts";
 import Header from "@/components/Header/Header";
+import { fetchAllTypes } from "@/lib/materialTypesApi";
 
 const MaterialsPage = async ({
   searchParams,
@@ -23,7 +24,7 @@ const MaterialsPage = async ({
   const { data: materials, totalPages } = await fetchMaterialsPaginated(
     searchParams
   );
-  successToast("a");
+  const materialTypes = await fetchAllTypes();
   return (
     <CardWrapper>
       <Header
@@ -31,7 +32,7 @@ const MaterialsPage = async ({
         buttonRef="materiales/create"
         buttonText="Añadir Material"
       />
-      <MaterialsSearch />
+      <MaterialsSearch materialTypes={materialTypes} />
       <div className="w-full">
         <Suspense fallback={<TableSkeleton rows={10} columns={3} />}>
           <Table

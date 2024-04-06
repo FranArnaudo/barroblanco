@@ -28,3 +28,14 @@ export type CalculationSummary = {
   total: number;
   summary: { name: string; cost: number }[];
 };
+
+export type MaterialType = {
+  id: string;
+  name: string;
+  description?: string;
+};
+
+export type CreateMaterialTypeForm = {
+  name: string;
+  description?: string;
+};
