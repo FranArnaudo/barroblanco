@@ -3,11 +3,20 @@ import Header from "@/components/Header/Header";
 import TableSkeleton from "@/components/Skeletons/TableSkeleton";
 import Table from "@/components/Table/Table";
 import { fetchTypesPaginated } from "@/lib/materialTypesApi";
+import MaterialTypesSearch from "@/ui/materialTypes/MaterialTypesSearch";
 import MaterialTypesTableActions from "@/ui/materialTypes/MaterialTypesTableActions";
 import { Suspense } from "react";
 
-const MaterialTypesPage = async () => {
-  const types = await fetchTypesPaginated({ name: "", page: "1", take: "15" });
+const MaterialTypesPage = async ({
+  searchParams,
+}: {
+  searchParams: {
+    name: string;
+    page: string;
+    take: string;
+  };
+}) => {
+  const types = await fetchTypesPaginated(searchParams);
   return (
     <CardWrapper>
       <Header
@@ -15,6 +24,7 @@ const MaterialTypesPage = async () => {
         buttonRef="/tipos/create"
         buttonText="Añadir tipo"
       />
+      <MaterialTypesSearch />
       <div className="w-full">
         <Suspense fallback={<TableSkeleton rows={10} columns={2} />}>
           <Table

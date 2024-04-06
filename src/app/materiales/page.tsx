@@ -25,7 +25,6 @@ const MaterialsPage = async ({
     searchParams
   );
   const materialTypes = await fetchAllTypes();
-  successToast("a");
   return (
     <CardWrapper>
       <Header
