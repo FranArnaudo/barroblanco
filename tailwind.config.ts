@@ -29,6 +29,9 @@ const config: Config = {
         "danger-dark": "#a82c23",
         "danger-light": "#ed574c",
       },
+      aspectRatio: {
+        "1/2": "1 / 2",
+      },
     },
   },
   plugins: [],

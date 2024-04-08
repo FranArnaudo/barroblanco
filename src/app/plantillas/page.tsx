@@ -1,10 +1,21 @@
 import CardWrapper from "@/components/CardWrapper/CardWrapper";
+import Header from "@/components/Header/Header";
+import { fetchAllTemplates } from "@/lib/serverActions/templateServerActions";
+import TemplateCard from "@/ui/templates/TemplateCard";
 
-const PlantillasPage = () => {
+const PlantillasPage = async () => {
+  const templates = await fetchAllTemplates();
   return (
     <CardWrapper>
-      <div className="h-full w-full flex justify-center items-center">
-        <h1 className="font-bold">Todavia no esta listo, vuelva pronto :D</h1>
+      <Header
+        title="Plantillas"
+        buttonText="Añadir plantilla"
+        buttonRef="/plantillas/create"
+      />
+      <div>
+        {templates.map((template) => (
+          <TemplateCard key={template.id} template={template} />
+        ))}
       </div>
     </CardWrapper>
   );

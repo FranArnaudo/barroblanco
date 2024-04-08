@@ -2,7 +2,7 @@ import CardWrapper from "@/components/CardWrapper/CardWrapper";
 import Header from "@/components/Header/Header";
 import TableSkeleton from "@/components/Skeletons/TableSkeleton";
 import Table from "@/components/Table/Table";
-import { fetchTypesPaginated } from "@/lib/materialTypesApi";
+import { fetchTypesPaginated } from "@/lib/serverActions/materialTypeServerActions";
 import MaterialTypesSearch from "@/ui/materialTypes/MaterialTypesSearch";
 import MaterialTypesTableActions from "@/ui/materialTypes/MaterialTypesTableActions";
 import { Suspense } from "react";

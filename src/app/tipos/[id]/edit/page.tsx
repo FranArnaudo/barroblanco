@@ -1,5 +1,5 @@
 import CardWrapper from "@/components/CardWrapper/CardWrapper";
-import { fetchTypeById } from "@/lib/materialTypesApi";
+import { fetchTypeById } from "@/lib/serverActions/materialTypeServerActions";
 import MaterialTypesEditForm from "@/ui/materialTypes/MaterialTypesEditForm";
 
 type EditMaterialTypeProps = {

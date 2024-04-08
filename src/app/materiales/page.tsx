@@ -1,14 +1,13 @@
 import Table from "@/components/Table/Table";
-import { fetchMaterialsPaginated } from "@/lib/materialsApi";
 import { unstable_noStore as noStore } from "next/cache";
 import MaterialsSearch from "@/ui/materials/MaterialsSearch";
 import MaterialsTableActions from "@/ui/materials/MaterialsTableActions";
 import { Suspense } from "react";
 import TableSkeleton from "@/components/Skeletons/TableSkeleton";
 import CardWrapper from "@/components/CardWrapper/CardWrapper";
-import { successToast } from "@/lib/toasts";
 import Header from "@/components/Header/Header";
-import { fetchAllTypes } from "@/lib/materialTypesApi";
+import { fetchAllTypes } from "@/lib/serverActions/materialTypeServerActions";
+import { fetchMaterialsPaginated } from "@/lib/serverActions/materialsServerActions";
 
 const MaterialsPage = async ({
   searchParams,

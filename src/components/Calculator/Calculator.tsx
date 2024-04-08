@@ -1,7 +1,7 @@
 "use client";
 
 import { MdiTrashOutline, TypcnPlus } from "@/ui/icons/Icons";
-import { ChangeEvent, useState } from "react";
+import { ChangeEvent, Dispatch, SetStateAction, useState } from "react";
 import { uuid } from "uuidv4";
 import { debounce } from "lodash";
 import { calculate } from "@/lib/serverActions/materialsServerActions";
@@ -11,9 +11,23 @@ import { CalculationRow, CalculationSummary, Material } from "../../../types";
 
 type CalculatorProps = {
   materials: Material[];
+  isContained?: boolean;
+  setTotalAndRows?: Dispatch<
+    SetStateAction<
+      | {
+          total: number;
+          rows: CalculationRow[];
+        }
+      | undefined
+    >
+  >;
 };
 
-const Calculator = ({ materials }: CalculatorProps) => {
+const Calculator = ({
+  materials,
+  isContained,
+  setTotalAndRows,
+}: CalculatorProps) => {
   const [rows, setRows] = useState<CalculationRow[]>([]);
   const [loadingCalculation, setLoadingCalculation] = useState<boolean>(false);
   const [calculationResult, setCalculationResult] = useState<
@@ -37,6 +51,9 @@ const Calculator = ({ materials }: CalculatorProps) => {
     setLoadingCalculation(true);
     const calcResult = await calculate(rows);
     setCalculationResult(calcResult);
+    if (setTotalAndRows) {
+      setTotalAndRows({ rows, total: calcResult.total });
+    }
     setLoadingCalculation(false);
   };
   return (
@@ -71,8 +88,13 @@ const Calculator = ({ materials }: CalculatorProps) => {
           </span>
         </div>
       )}
-      <div className="flex md:flex-row flex-col gap-2 w-full md:justify-center pt-4">
+      <div
+        className={`flex md:flex-row gap-2 w-full md:justify-center pt-4 ${
+          isContained ? "children:max-w-1/2 justify-center" : "flex-col"
+        }`}
+      >
         <button
+          type="button"
           onClick={addCalculationRow}
           disabled={loadingCalculation}
           className="custom-button"
@@ -81,7 +103,7 @@ const Calculator = ({ materials }: CalculatorProps) => {
         </button>
         <button
           onClick={handleCalculate}
-          disabled={loadingCalculation}
+          disabled={loadingCalculation || !rows.length}
           className="custom-button"
         >
           Calcular

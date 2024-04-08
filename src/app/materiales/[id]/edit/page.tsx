@@ -1,7 +1,7 @@
 import CardWrapper from "@/components/CardWrapper/CardWrapper";
-import { fetchMaterialById } from "@/lib/materialsApi";
 import MaterialsEditForm from "@/ui/materials/MaterialsEditForm";
 import { Material } from "../../../../../types";
+import { fetchMaterialById } from "@/lib/serverActions/materialsServerActions";
 
 type EditMaterialPageProps = {
   params: {

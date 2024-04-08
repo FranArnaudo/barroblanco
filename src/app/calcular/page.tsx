@@ -1,7 +1,7 @@
 import Calculator from "@/components/Calculator/Calculator";
 import CardWrapper from "@/components/CardWrapper/CardWrapper";
 import Header from "@/components/Header/Header";
-import { fetchAllMaterials } from "@/lib/materialsApi";
+import { fetchAllMaterials } from "@/lib/serverActions/materialsServerActions";
 
 const CalculationPage = async () => {
   const materials = await fetchAllMaterials();
