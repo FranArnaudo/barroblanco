@@ -65,3 +65,16 @@ export type CreateMaterialTypeForm = {
   name: string;
   description?: string;
 };
+
+// USER
+export type User = {
+  id: string;
+  email: string;
+  password: string;
+  verified: boolean;
+};
+
+export type UserForm = {
+  email: string;
+  password: string;
+};

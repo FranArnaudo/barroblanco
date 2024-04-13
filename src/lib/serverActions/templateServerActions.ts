@@ -10,7 +10,7 @@ export const createTemplate = async (data: Partial<Template>) => {
   let imgUrl = "";
   if (data.img) {
     try {
-      const newKey = `${data.name?.replace(" ", "")}K${uuid()}.jpg`;
+      const newKey = `${data.name?.replace(" ", "")}K${uuid()}`;
       const putObject = new PutObjectCommand({
         Bucket: process.env.AWS_S3_BUCKET,
         Key: newKey,
