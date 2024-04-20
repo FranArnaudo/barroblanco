@@ -3,7 +3,9 @@ import { Montserrat } from "next/font/google";
 import "./globals.css";
 import Sidebar from "@/components/Sidebar/Sidebar";
 import { ToastContainer } from "react-toastify";
-import ToastProvider from "@/ui/providers/ToastProvider";
+import ToastProvider from "@/providers/ToastProvider";
+import ProtectedRoute from "@/ui/protectedRoutes/ProtectedRoute";
+import { AuthStoreProvider } from "@/providers/AuthStoreProvider";
 
 const montserrat = Montserrat({ subsets: ["latin"] });
 
@@ -22,8 +24,12 @@ export default function RootLayout({
       <body
         className={`${montserrat.className} h-full w-full bg-primary-light flex text-black`}
       >
-        <Sidebar />
-        <ToastProvider>{children}</ToastProvider>
+        <AuthStoreProvider>
+          <Sidebar />
+          <ToastProvider>
+            <ProtectedRoute>{children}</ProtectedRoute>
+          </ToastProvider>
+        </AuthStoreProvider>
       </body>
     </html>
   );

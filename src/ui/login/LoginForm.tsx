@@ -4,7 +4,9 @@ import { useForm, SubmitHandler } from "react-hook-form";
 import { UserForm } from "../../../types";
 import { useRouter } from "next/navigation";
 import { errorToast, successToast } from "@/lib/toasts";
-import { createMaterialType } from "@/lib/serverActions/materialTypeServerActions";
+import axios, { AxiosResponse } from "axios";
+import { useAuthStore } from "@/providers/AuthStoreProvider";
+import { setCurrentUserCookies } from "@/lib/serverActions/setCurrentUserCookies";
 
 const LoginForm = () => {
   const {
@@ -19,15 +21,22 @@ const LoginForm = () => {
     },
   });
   const router = useRouter();
-  const onSubmit: SubmitHandler<UserForm> = (data) => {};
-  // createMaterialType(data)
-  //   .then(() =>
-  //     successToast(`Tipo de material ${data.name} creado con exito`)
-  //   )
-  //   .catch(() =>
-  //     errorToast("Ha sucedido un error al crear el tipo de material")
-  //   )
-  //   .finally(() => router.replace("/tipos"));
+  const { token, saveToken } = useAuthStore((state) => state);
+  const onSubmit: SubmitHandler<UserForm> = async (data) => {
+    axios
+      .post("/api/user/login", {
+        email: data.email,
+        password: data.password,
+      })
+      .then((res: AxiosResponse<{ token: string }, any>) => {
+        setCurrentUserCookies(res.data.token);
+        successToast("Se inicio sesion correctamente");
+      })
+      .catch(() => errorToast("Inicio de sesion fallido"))
+      .finally(() => {
+        router.replace("/");
+      });
+  };
   return (
     <form
       className="w-full flex flex-col gap-3"

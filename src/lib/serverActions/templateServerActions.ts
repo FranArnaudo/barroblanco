@@ -18,12 +18,7 @@ export const createTemplate = async (data: Partial<Template>) => {
       });
       await s3Client.send(putObject);
       imgUrl = `https://${process.env.AWS_S3_BUCKET}.s3.sa-east-1.amazonaws.com/${newKey}`;
-    } catch (error) {
-      console.log(
-        "🚀Fran ~ file: templateServerActions.ts:27 ~ createTemplate ~ error:",
-        error
-      );
-    }
+    } catch (error) {}
     const client = await clientPromise;
     client
       .db(process.env.DATABASE_NAME)

@@ -126,7 +126,6 @@ const Row = ({ row, materials, deleteRow, updateRow }: RowProps) => {
   const handleChange = (
     e: ChangeEvent<HTMLSelectElement | HTMLInputElement>
   ) => {
-    console.log({ ...localRowValues, [e.target.name]: e.target.value });
     const newRowValues = { ...localRowValues, [e.target.name]: e.target.value };
     updateRow(newRowValues);
     setLocalRowValues(newRowValues);

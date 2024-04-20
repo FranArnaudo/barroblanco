@@ -1,7 +1,7 @@
 "use client";
 
 import "react-toastify/dist/ReactToastify.css";
-import "../../app/globals.css";
+import "../app/globals.css";
 import { ToastContainer } from "react-toastify";
 import { Montserrat } from "next/font/google";
 

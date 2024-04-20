@@ -3,7 +3,10 @@
 import { revalidatePath } from "next/cache";
 import clientPromise from "../mongodb";
 import { CalculationRow, CalculationSummary, Material } from "../../../types";
+import jwt from "jsonwebtoken";
 import { uuid } from "uuidv4";
+import { cookies } from "next/headers";
+import { authenticate } from "./authentication";
 
 export const createMaterial = async (data: Partial<Material>) => {
   const client = await clientPromise;
@@ -72,7 +75,6 @@ export const calculate = async (rows: CalculationRow[]) => {
     },
     { total: 0, summary: [] }
   );
-  console.log("fran", final);
   return final;
 };
 
@@ -95,6 +97,7 @@ export const fetchMaterialsPaginated = async ({
   page,
   take = "10",
 }: FetchMaterialsArgs) => {
+  authenticate();
   const client = await clientPromise;
   await client.connect();
   let query: MaterialsQuery = {};

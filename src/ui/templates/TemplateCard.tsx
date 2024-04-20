@@ -8,10 +8,6 @@ type TemplateCardProps = {
   template: Template;
 };
 const TemplateCard = ({ template }: TemplateCardProps) => {
-  console.log(
-    "🚀Fran ~ file: TemplateCard.tsx:11 ~ TemplateCard ~ template:",
-    template
-  );
   return (
     <>
       <div className="peer flex z-10 flex-col bg-white rounded-lg shadow-2xl hover:relative aspect-[1/2] hover:scale-105 duration-300">

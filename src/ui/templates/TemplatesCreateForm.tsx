@@ -28,10 +28,6 @@ const TemplateCreateForm = ({ materials }: TemplateCreateFormProps) => {
     src: "",
     blob: undefined,
   });
-  console.log(
-    "🚀Fran ~ file: TemplatesCreateForm.tsx:24 ~ TemplateCreateForm ~ photo:",
-    photo
-  );
   const {
     register,
     handleSubmit,
